@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Pregunta, ElegirRespuesta
+from .models import Pregunta, ElegirRespuesta, Categoria
 
 # Register your models here.
 
@@ -20,4 +20,5 @@ class PreguntaAdmin(admin.ModelAdmin):
 
 admin.site.register(Pregunta, PreguntaAdmin)
 admin.site.register(ElegirRespuesta)
+admin.site.register(Categoria)
 
