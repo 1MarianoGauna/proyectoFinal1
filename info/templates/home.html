@@ -9,6 +9,13 @@
     <title>Document</title>
 </head>
 <body>
-
+    <nav>
+        <ul>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'login' %">Logout</a></li>
+        </ul>
+    </nav>
+{%block contenido %}
+{%endblock contenido %}
 </body>
 </html>

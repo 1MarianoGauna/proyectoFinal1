@@ -1,10 +1,12 @@
 {%extends 'home.html' %}
+
 {%block contenido%}
-<form method="POST"> {% csrf_token %}
+
+<form method="POST">{% csrf_token %}
     {{form.errors}}
     <input type="text" name='username' placeholder="Ingresa tu usuario">
-    <input type="password" name='contra' placeholder="Ingresa tu contraseña">
-    <input type="submit" name='enviar'>
+    <input type="password" name='password' placeholder="Ingresa tu contraseña">
+    <input type="submit" name='enviar' value='login'>
 </form>
 
 {%endblock contenido%}
