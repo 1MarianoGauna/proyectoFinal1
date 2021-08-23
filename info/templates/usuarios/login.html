@@ -1,12 +1,12 @@
 {%extends 'home.html' %}
 
 {%block contenido%}
-
-<form method="POST">{% csrf_token %}
-    {{form.errors}}
-    <input type="text" name='username' placeholder="Ingresa tu usuario">
-    <input type="password" name='password' placeholder="Ingresa tu contraseña">
-    <input type="submit" name='enviar' value='login'>
-</form>
-
+<section class="iniciarSesion">
+    <form method="POST">{% csrf_token %}
+        {{form.errors}}
+        <input class="username" type="text" name='username' placeholder="Ingresa tu usuario">
+        <input class="pass" type="password" name='password' placeholder="Ingresa tu contraseña">
+        <input class="subir" type="submit" name='enviar' value='Ingresar'>
+    </form>
+</section>
 {%endblock contenido%}
