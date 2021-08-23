@@ -1,21 +1,31 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href='{% static "css/estilo.css" %}'>
     <title>Document</title>
 </head>
+
 <body>
-    <nav>
-        <ul>
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'login' %">Logout</a></li>
-        </ul>
-    </nav>
-{%block contenido %}
-{%endblock contenido %}
+    <header>
+        <img src="{% static 'img/info.png' %}" alt="Imagen del Informatorio">
+        <nav class="navHeader">
+            <ul class="navHeader__menu">
+                <li class="navHeader__item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="navHeader__item"><a href="{% url 'login' %}">Login</a></li>
+                <li class="navHeader__item"><a href="{% url 'login' %">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    {%block contenido %}
+    <div class="imagenFondo">
+    </div>
+    {%endblock contenido %}
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
+
 </html>
