@@ -1,17 +1,49 @@
 
-{% for pregunta in pregunta %}
+{% block contenido %}
 
-     <p>
-          {{pregunta}}
-    </p>
-    {% for respuestas in pregunta.preguntas.all %} 
-            <p>
-            	<strong>
-            		 {{ respuestas}}
-            	</strong>
-            </p>
-           
-    {% endfor %}   
-   
+{% if pregunta is None %}
 
-{% endfor %}
+<div class="container">
+     <div class="jumbotron my-4">
+          <h1>Ya haz respondido a todas nuestras preguntas.</h1>
+     </div>
+</div>
+
+{% else %}
+
+
+<div class="container">
+     
+     <div class="jumbotron my-4">
+          
+          <h3>
+               {{pregunta.texto}}
+          </h3>
+
+          <form method="POST" class="form">
+               {% csrf_token %}
+               <input type="hidden" name="pregunta_pk" value="{{pregunta.pk}}">
+
+               {% for opcion in pregunta.opcion.all %}
+                    <div class="form-check mx-4">
+                    <input class="form-check-input" type="radio" name="respuesta_pk" value="{{opcion.pk}}" id="choice-{{forloop.counter}}">
+                    <label class="form-check-label" for="choice-{{forloop.counter}}">
+                         {{opcion.texto}}
+                    </label>
+                    </div>
+               {% endfor %}
+
+               <button type="submit" class="btn btn-success">
+                    Enviar
+               </button>
+
+          </form>
+
+     </div>
+
+</div>
+
+
+{% endif %}
+
+{% endblock %}

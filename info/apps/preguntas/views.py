@@ -6,16 +6,31 @@ from .models import Jugador, Pregunta, PreguntasRespondida
 
 def jugar(request):
 
-	usuario, created = Jugador.objects.get_or_create(usuario=request.user)
+	jugadorp, created = Jugador.objects.get_or_create(usuario=request.user)
 
 	if request.method == 'POST':
 		pregunta_pk = request.POST.get('pregunta_pk')
-		pregunta_respondida = usuario.intentos.select_related('pregunta').get(pregunta_pk=pregunta_pk)
-		respuesta_pk = request.POST.get('respuesta')
+		pregunta_contestada = jugadorp.intentos.select_related('pregunta').get(pregunta__pk=pregunta_pk)
+		respuesta_pk = request.POST.get('respuesta_pk')
+
+		try:
+			opcion_elegida = pregunta_contestada.pregunta.opcion.get(pk=respuesta_pk)
+
+		except ObjetoNoExiste:
+			raise Http404
+
+		jugadorp.probar_intento(pregunta_contestada, opcion_elegida)
+
+		return redirect(pregunta_contestada)
+
+
+
 
 	else:
-		respondidas = PreguntasRespondida.objects.filter(usuario=usuario).values_list('pregunta__pk', flat=True)
-		pregunta = Pregunta.objects.exclude(pk__in=respondidas)
+		pregunta = jugadorp.nueva_pregunta()
+
+		if pregunta is not None:
+			jugadorp.intentos(pregunta)
 
 		context = {
 		     'pregunta':pregunta
