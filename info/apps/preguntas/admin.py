@@ -2,13 +2,16 @@ from django.contrib import admin
 
 from .models import Pregunta, ElegirRespuesta, Categoria, PreguntasRespondida, Jugador
 
+from .forms import ElegirInlineFormset
+
 # Register your models here.
 
 class ElegirRespuestaInline(admin.TabularInline):
 	model = ElegirRespuesta
-	can_delete =False
+	can_delete = False
 	max_num = ElegirRespuesta.MAXIMO_RESPUESTA
 	min_num = ElegirRespuesta.MAXIMO_RESPUESTA
+	formset = ElegirInlineFormset
 
 class PreguntaAdmin(admin.ModelAdmin):
 	model = Pregunta
@@ -29,5 +32,6 @@ admin.site.register(ElegirRespuesta)
 admin.site.register(Categoria)
 admin.site.register(PreguntasRespondida)
 admin.site.register(Jugador)
+
 
 

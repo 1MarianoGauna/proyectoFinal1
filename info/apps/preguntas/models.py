@@ -19,6 +19,7 @@ class Pregunta(models.Model):
 	categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, default=True, null=False)
 	texto = models.TextField(verbose_name='Texto de la pregunta')
 	max_puntaje = models.DecimalField(verbose_name='Puntaje Maximo', default = 1, decimal_places = 2, max_digits= 6)
+	n_respuestas_permitidas = 1
 
 	def __str__(self):
 		return self.texto
@@ -73,8 +74,9 @@ class Jugador(models.Model):
 		
 
 class PreguntasRespondida(models.Model):
-	usuario = models.ForeignKey(Jugador, on_delete=models.CASCADE, related_name = 'intento')
+	
+	usuario = models.ForeignKey(Jugador, on_delete=models.CASCADE)
 	pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
-	respuesta = models.ForeignKey(ElegirRespuesta, on_delete=models.CASCADE, null = True)
+	respuesta = models.ForeignKey(ElegirRespuesta, on_delete=models.CASCADE, null = True, related_name = 'intento')
 	correcta = models.BooleanField(verbose_name='¿Es esta la respuesta correcta?', default=False, null=False)
 	puntaje_obtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, decimal_places=2, max_digits=6)
