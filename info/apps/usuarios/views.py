@@ -13,7 +13,7 @@ def registro(request):
 		form = FormularioRegistro(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('')
+			return redirect('login')
 
 	else:
 		form = FormularioRegistro()

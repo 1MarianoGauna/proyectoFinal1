@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Jugador, Pregunta, PreguntasRespondida
 
@@ -21,7 +21,7 @@ def jugar(request):
 
 		jugadorp.probar_intento(pregunta_contestada, opcion_elegida)
 
-		return redirect(pregunta_contestada)
+		return redirect('resultado', pregunta_contestada.pk)
 
 
 
@@ -30,10 +30,22 @@ def jugar(request):
 		pregunta = jugadorp.nueva_pregunta()
 
 		if pregunta is not None:
-			jugadorp.intentos(pregunta)
+			jugadorp.nuevo_intento(pregunta)
 
 		context = {
 		     'pregunta':pregunta
 		}
 
 	return render(request, 'play/jugar.html', context)
+
+
+def resultado_pregunta(request, pregunta_contestada_pk):
+	respondida = get_object_or_404(PreguntasRespondida, pk=pregunta_contestada_pk)
+
+	context = {
+
+		'respondida' : respondida
+
+	}
+
+	return render(request, 'play/resultados.html', context)
