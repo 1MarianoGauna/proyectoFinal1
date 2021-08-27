@@ -28,7 +28,7 @@ class PreguntasRespondidaAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Pregunta, PreguntaAdmin)
-admin.site.register(ElegirRespuesta)
+#admin.site.register(ElegirRespuesta)
 admin.site.register(Categoria)
 admin.site.register(PreguntasRespondida)
 admin.site.register(Jugador)

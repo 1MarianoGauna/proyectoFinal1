@@ -49,3 +49,17 @@ def resultado_pregunta(request, pregunta_contestada_pk):
 	}
 
 	return render(request, 'play/resultados.html', context)
+
+
+def tablero(request):
+	usuarios_totales = Jugador.objects.order_by('-puntaje_total')[:10]
+	contador = usuarios_totales.count()
+
+	context = {
+
+		'usuario_quiz':usuarios_totales,
+		'contar_usuario':contador,
+
+	}
+
+	return render(request, 'play/tablero.html', context )

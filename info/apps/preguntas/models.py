@@ -71,7 +71,13 @@ class Jugador(models.Model):
 			pregunta_contestada.respuesta = respuesta_elegida
 
 		pregunta_contestada.save()
-		
+		self.puntaje_actualizado()
+
+	def puntaje_actualizado(self):
+		ultimo_puntaje = self.intentos.filter(correcta = True).aggregate(models.Sum('puntaje_obtenido'))['puntaje_obtenido__sum']
+
+		self.puntaje_total = ultimo_puntaje
+		self.save()
 
 class PreguntasRespondida(models.Model):
 	
