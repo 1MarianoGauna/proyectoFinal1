@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Jugador, Pregunta, PreguntasRespondida
+from .models import Jugador, Pregunta, PreguntasRespondida, Categoria
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required
 def jugar(request):
 
 	jugadorp, created = Jugador.objects.get_or_create(usuario=request.user)
@@ -63,3 +64,10 @@ def tablero(request):
 	}
 
 	return render(request, 'play/tablero.html', context )
+
+def CategoriaPregunta (request):
+	context={}
+	categoria = Categoria.objects.all()
+	context['categoria'] = categoria
+
+	return render(request, 'play/categorias.html', context)

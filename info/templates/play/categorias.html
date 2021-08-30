@@ -1,0 +1,26 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+<center>
+<div class="jumbotron my-7">
+
+    <h4>ELEGÍ LA CATEGORIA QUE QUIERAS JUGAR</h4>
+
+ {%for n in categoria%}
+    
+
+
+    <button type="submit" class="btn btn-dark">
+        
+        <a href="{% url 'jugar' %}"> <center>{{n.categoria.upper}}</center> </a>
+        
+    </button>
+ {%endfor%}
+
+</div>
+</center>
+{% endblock %}

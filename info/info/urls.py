@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth
 from apps.usuarios.views import registro
-from apps.preguntas.views import jugar, resultado_pregunta, tablero
+from apps.preguntas.views import jugar, resultado_pregunta, tablero, CategoriaPregunta
 
 
 from . import views
@@ -21,6 +21,7 @@ urlpatterns = [
     path('jugar/', jugar, name = 'jugar'),
     path('resultado/<int:pregunta_contestada_pk>/', resultado_pregunta, name = 'resultado'),
     path('tablero/', tablero, name = 'tablero'),
+    path('categoria/', CategoriaPregunta, name = 'categoria'),
 
 
 ]
