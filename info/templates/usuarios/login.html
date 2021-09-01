@@ -2,7 +2,7 @@
 
 {%block contenido%}
 <section class="iniciarSesion">
-    <form method="POST">{% csrf_token %}
+    <form class="initSesion" method="POST">{% csrf_token %}
         {{form.errors}}
         <input class="username" type="text" name='username' placeholder="Ingresa tu usuario">
         <input class="pass" type="password" name='password' placeholder="Ingresa tu contraseña">
